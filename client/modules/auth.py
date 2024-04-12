@@ -3,6 +3,8 @@ import os
 from modules.asciiart import title
 from InquirerPy import inquirer
 
+jsonwebtoken = ""
+
 def auth():
     options = ["Login", "Register"]
     choice = inquirer.select(
@@ -45,4 +47,9 @@ def login():
             os.system("cls")
         else:
             input("\nLogged in successfully!")
+            global jsonwebtoken
+            jsonwebtoken = response.json()["jsonwebtoken"]
             return response.json()["jsonwebtoken"]
+
+def getJWT():
+    return jsonwebtoken

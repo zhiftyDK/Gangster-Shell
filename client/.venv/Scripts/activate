@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\juuls\OneDrive\Dokumenter\GitHub\Gangster-Shell\client\.venv"
+VIRTUAL_ENV="C:\Users\juuls\Documents\GitHub\Gangster-Shell\client\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
