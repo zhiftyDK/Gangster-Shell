@@ -149,6 +149,7 @@ const mods = [
 export function generateWeapon(modifications) {
     const modamount = modifications || [0,0,0,0,1,1,1,2,2,3][Math.floor(Math.random()*[0,0,0,0,1,1,1,2,2,3].length)];
     const armoramount = [1,1,1,2,2,3][Math.floor(Math.random()*[1,1,1,2,2,3].length)];
+    const price = Math.floor(Math.random() * (500 - 50 + 1) + 50) * (modamount + 1);
     const damage = Math.floor(Math.random() * (10 - 5 + 1) + 5) * (modamount + 1);
     const selectedmods = [];
     for (let i = 0; i < modamount; i++) {
@@ -160,9 +161,23 @@ export function generateWeapon(modifications) {
     }
     const weapon = {
         "name": guns[Math.floor(Math.random()*guns.length)],
+        "price": price,
         "damage": damage,
         "effective_against": selectedarmor,
         "modifications": selectedmods
     }
-    console.log(weapon);
+    return weapon
+}
+
+export function upgradeWeapon(weapon) {
+    const modamount = weapon.modifications.length;
+
+    const upgradedWeapon = {
+        "name": weapon.name,
+        "price": weapon.price / modamount * (modamount + 1),
+        "damage": weapon.damage / modamount * (modamount + 1),
+        "effective_against": weapon.effective_against.push(armor[Math.floor(Math.random()*armor.length)]),
+        "modifications": weapon.modifications.push(mods[Math.floor(Math.random()*mods.length)])
+    }
+    return upgradedWeapon
 }
