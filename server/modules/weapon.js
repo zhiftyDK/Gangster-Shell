@@ -153,11 +153,11 @@ export function generateWeapon(modifications) {
     const damage = Math.floor(Math.random() * (10 - 5 + 1) + 5) * (modamount + 1);
     const selectedmods = [];
     for (let i = 0; i < modamount; i++) {
-        selectedmods.push(mods[Math.floor(Math.random()*mods.length)])
+        selectedmods.push(mods[Math.floor(Math.random()*mods.length)]);
     }
     const selectedarmor = [];
     for (let i = 0; i < armoramount; i++) {
-        selectedmods.push(armor[Math.floor(Math.random()*armor.length)])
+        selectedmods.push(armor[Math.floor(Math.random()*armor.length)]);
     }
     const weapon = {
         "name": guns[Math.floor(Math.random()*guns.length)],
@@ -171,13 +171,16 @@ export function generateWeapon(modifications) {
 
 export function upgradeWeapon(weapon) {
     const modamount = weapon.modifications.length;
-
-    const upgradedWeapon = {
-        "name": weapon.name,
-        "price": weapon.price / modamount * (modamount + 1),
-        "damage": weapon.damage / modamount * (modamount + 1),
-        "effective_against": weapon.effective_against.push(armor[Math.floor(Math.random()*armor.length)]),
-        "modifications": weapon.modifications.push(mods[Math.floor(Math.random()*mods.length)])
+    if(modamount < 3) {
+        const upgradedWeapon = {
+            "name": weapon.name,
+            "price": weapon.price / modamount * (modamount + 1),
+            "damage": weapon.damage / modamount * (modamount + 1),
+            "effective_against": weapon.effective_against.push(armor[Math.floor(Math.random()*armor.length)]),
+            "modifications": weapon.modifications.push(mods[Math.floor(Math.random()*mods.length)])
+        }
+        return upgradedWeapon
+    } else {
+        return {error: true, message: "Weapon is already fully upgraded!"}
     }
-    return upgradedWeapon
 }

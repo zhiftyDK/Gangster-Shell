@@ -1,0 +1,2 @@
+import {} from "./weapon.js";
+

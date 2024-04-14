@@ -1,6 +1,5 @@
 import {verifyJwt} from "./middleware.js";
 import {users} from "./database.js";
-import {generateWeapon} from "./weapon.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 import express from "express";
@@ -18,7 +17,7 @@ router.post("/register", (req, res) => {
         }
         if(data.length == 0) {
             const hashedPass = bcrypt.hashSync(req.body.password, 10);
-            users.insert({username: req.body.username, email: req.body.email, password: hashedPass});
+            users.insert({username: req.body.username, email: req.body.email, password: hashedPass, experience: 0, money: 50});
             res.send({error: false, message: "User registered successfully!"});
         } else {
             res.send({error: true, message: "Email already exists!"});
