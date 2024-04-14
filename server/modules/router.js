@@ -1,5 +1,6 @@
 import {verifyJwt} from "./middleware.js";
-import {users, friends} from "./database.js";
+import {users} from "./database.js";
+import {generateWeapon} from "./weapon.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 import express from "express";
@@ -58,7 +59,7 @@ router.get("/users", verifyJwt, (req, res) => {
             }
         });
         return res.send({error: false, users: usernames});
-    }); 
+    });
 });
 
 export default router
