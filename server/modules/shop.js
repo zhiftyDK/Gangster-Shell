@@ -1,2 +1,2 @@
-import {} from "./weapon.js";
+import {generateWeapon, upgradeWeapon} from "./weapon.js";
 

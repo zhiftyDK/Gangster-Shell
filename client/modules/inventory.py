@@ -1,4 +1,4 @@
-from modules.asciiart import title
+from modules.assets import title
 import os
 
 def inventory():

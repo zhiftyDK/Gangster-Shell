@@ -1,13 +1,13 @@
+from modules.assets import title
+from InquirerPy import inquirer
 import requests
 import os
-from modules.asciiart import title
-from InquirerPy import inquirer
 
 jsonwebtoken = ""
 
 def auth():
     os.system("cls")
-    title("GangsterShell")
+    title("GunSlinger")
     options = ["Login", "Register"]
     choice = inquirer.select(
         message = "Login or register:",
@@ -53,6 +53,20 @@ def login():
             global jsonwebtoken
             jsonwebtoken = response.json()["jsonwebtoken"]
             break
+
+def getUserData():
+    body = {
+        "jsonwebtoken": jsonwebtoken
+    }
+    response = requests.get("http://localhost:3000/userdata", json=body)
+    return response.json()["userdata"]
+
+def getUsers():
+    body = {
+        "jsonwebtoken": jsonwebtoken
+    }
+    response = requests.get("http://localhost:3000/users", json=body)
+    return response.json()["users"]
 
 def getJWT():
     return jsonwebtoken

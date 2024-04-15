@@ -61,4 +61,19 @@ router.get("/users", verifyJwt, (req, res) => {
     });
 });
 
+router.get("/userdata", verifyJwt, (req, res) => {
+    users.find({email: res.locals.decoded.email}, (err, data) => {
+        if(err) {
+            return res.send({error: true, message: "An error occured!"});
+        }
+        const userdata = {
+            username: data[0].username,
+            email: data[0].email,
+            experience: data[0].experience,
+            money: data[0].money
+        }
+        return res.send({error: false, userdata: userdata});
+    });
+});
+
 export default router

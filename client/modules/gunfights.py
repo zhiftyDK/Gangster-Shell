@@ -1,7 +1,6 @@
-from modules.asciiart import title
-from modules.auth import getJWT
+from modules.assets import title
+from modules.authenticate import getUsers
 from InquirerPy import inquirer
-import requests
 import os
 
 def gunfights():
@@ -18,14 +17,15 @@ def online():
     pass
 
 def onlinewithfriends():
-    body = {
-        "jsonwebtoken": getJWT()
-    }
-    response = requests.get("http://localhost:3000/users", json=body)
-    action = inquirer.fuzzy(
-        message = "What is your friends username:",
-        choices = response.json()["users"]
-    ).execute()
+    users = getUsers()
+    if not len(users) == 0:
+        action = inquirer.fuzzy(
+            message = "What is your friends username:",
+            choices = users
+        ).execute()
+    else:
+        input("No players online!")
+        return
     
     # Create gunfight room
     #Invite player

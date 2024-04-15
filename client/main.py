@@ -1,18 +1,18 @@
-from modules.auth import auth, getJWT
+from modules.authenticate import auth
 from modules.gunfights import gunfights
 from modules.inventory import inventory
 from modules.character import character
-from modules.asciiart import title
+from modules.assets import title, stats
 from InquirerPy import inquirer
 import os
-import jwt
 
 auth()
-jwtdecoded = jwt.decode(getJWT(), key=None, options={"verify_signature":False})
 
 while(1):
     os.system("cls")
-    title(f"Welcome {jwtdecoded['username']}!")
+    title(f"Welcome to GunSlinger!")
+    stats()
+    print("\n")
     options = ["Gunfights", "Inventory", "Character", "Exit"]
     choice = inquirer.select(
         message = "Whats your next move?",
